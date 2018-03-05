@@ -31,7 +31,7 @@ class Ball(object):
         self.col = col
         self.cant_move_count = 0
 
-class DaltonBoard(object):
+class GaltonBoard(object):
     def __init__(self, width=25, distributorheight=22, collectorheight=22, numballs=200):
         self.width = width
         self.distributorheight = distributorheight
@@ -138,23 +138,23 @@ if __name__ == '__main__':
     import time
     import sys
 
-    argparser = argparse.ArgumentParser(description="A bad Simulation of a Dalton board, demonstrating Normal/Gaussian distribution")
+    argparser = argparse.ArgumentParser(description="A bad Simulation of a Galton board, demonstrating Normal/Gaussian distribution")
     argparser.add_argument('--balls',   action='store', nargs='?', help="number of balls to simulate",type=int,default=200)
-    argparser.add_argument('--width',   action='store', nargs='?', help="width of the Dalton Board in terms of number of balls",type=int,default=30)
-    argparser.add_argument('--distributorrows',   action='store', nargs='?', help="height of the distributor/randomizer/top section of the Dalton board",type=int,default=24)
-    argparser.add_argument('--collectorrows',   action='store', nargs='?', help="height of the collector/bottom section of the Dalton board",type=int,default=24)
-    argparser.add_argument('--showfullsimulation',   action='store', nargs='?', help="height of the collector/bottom section of the Dalton board",type=str,default="yes")
+    argparser.add_argument('--width',   action='store', nargs='?', help="width of the Galton Board in terms of number of balls",type=int,default=30)
+    argparser.add_argument('--distributorrows',   action='store', nargs='?', help="height of the distributor/randomizer/top section of the Galton board",type=int,default=24)
+    argparser.add_argument('--collectorrows',   action='store', nargs='?', help="height of the collector/bottom section of the Galton board",type=int,default=24)
+    argparser.add_argument('--showfullsimulation',   action='store', nargs='?', help="height of the collector/bottom section of the Galton board",type=str,default="yes")
     options=argparser.parse_args(sys.argv[1:])
     showfullsim = options.showfullsimulation.lower() in ["yes","1","true"]
 
-    daboard = DaltonBoard(width=int(options.width), distributorheight=int(options.distributorrows), collectorheight=int(options.collectorrows), numballs=int(options.balls))
+    gaboard = GaltonBoard(width=int(options.width), distributorheight=int(options.distributorrows), collectorheight=int(options.collectorrows), numballs=int(options.balls))
 
-    while not (daboard.boardfull or daboard.simdone):
-        daboard.add_ball()
-        daboard.process()
+    while not (gaboard.boardfull or gaboard.simdone):
+        gaboard.add_ball()
+        gaboard.process()
         if showfullsim:
-            daboard.show()
+            gaboard.show()
             time.sleep(0.05)
 
     if not showfullsim:
-        daboard.showcollectoronly()
+        gaboard.showcollectoronly()
